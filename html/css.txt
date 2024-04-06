@@ -1,0 +1,10 @@
+#halfmoon.css
+https://www.gethalfmoon.com/
+#cirrus.css
+https://cirrus-ui.netlify.app/
+#magic anim
+https://www.minimamente.com/
+#picnic css
+https://picnicss.com/
+#animate css
+https://animate.style/

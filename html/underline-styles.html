@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Underline Styling effects</title>
+    <style>
+
+        #text{
+            display: flex;
+            justify-content: space-around;
+            margin: 2% 44%;
+            cursor: pointer;
+            
+        }
+        
+        /* part 1 (visible effect)---------------------------------------------------------------------------------------------------- */
+        .underline1{
+            position: relative;
+            padding-bottom: 2px;
+            border-bottom: 3px solid transparent; /* Initial transparent underline */
+            transition: border-color 0.3s ease; /* Smooth transition for color change */
+        } 
+
+         .underline1:hover{ 
+            border-color: red; /* Change to your desired underline color */ 
+        }
+
+        /* part 2 (outside effect)-------------------------------------------------------------------------------------------------------- */
+        .underline2{
+            position: relative;
+            display: inline-block;
+            }
+
+        .underline2::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            border-bottom: 3px solid transparent;
+            /* height: 2px;
+            background-color: darkslateblue;
+            bottom: -2px;
+            left: 0; */
+            transition: width 0.3s ease;
+            }
+
+        .underline2:hover::before {
+            border-color: darkslateblue;
+            bottom: -3px;
+            width: 100%;
+            }
+
+
+        /* part 3 (left to right effect) ----------------------------------------------------------------- */
+        .underline3{
+            position: relative;
+            display: inline-block;
+            }
+
+        .underline3::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            border-bottom: 3px solid transparent;
+            /* height: 2px;
+            background-color: darkslateblue;
+            bottom: -2px;
+            left: 0; */
+            transition: width 0.3s ease;
+            }
+
+        .underline3:hover::before {
+            border-color: darkslateblue;
+            left: 0; 
+            bottom: -3px;
+            width: 100%;
+            }
+        /* part 4 (inside effect)----------------------------------------------------------------- */
+        .underline4{
+                position: relative;
+                display: inline-block;
+            }
+
+        .underline4::before,
+        .underline4::after {
+                content: "";
+                position: absolute;
+                width: 0;
+                height: 2px;
+                background-color: greenyellow; /* Change this to your desired underline color */
+                transition: width 0.3s ease-in-out;
+            }
+
+        .underline4::before {
+                left: 0;
+                top: 100%;
+            }
+
+        .underline4::after {
+                right: 0;
+                top: 100%;
+            }
+
+        .underline4:hover::before,
+        .underline4:hover::after {
+                width: 50%;
+            }
+        /* part 5 (in and out effect) -------------------------------------------------------------------------------------------------- */
+        
+    /* Create the underline */
+        .underline5 {
+        position: relative;
+        display: inline-block;
+        padding-bottom: 5px;
+        transition: padding-bottom 0.3s ease-in-out;
+        }
+
+        /* Create the sliding effect */
+        .underline5::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: magenta;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease-in-out;
+        }
+
+        /* Hover effect - out */
+        .underline5:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h2  id="text" class="underline1">EXAMPLE 1</h2>
+    <h2  id="text" class="underline2">EXAMPLE 2</h2>
+    <h2  id="text" class="underline3">EXAMPLE 3</h2>
+    <h2  id="text" class="underline4">EXAMPLE 4</h2>
+    <h2  id="text" class="underline5">EXAMPLE 5</h2>
+</body>
+</html>

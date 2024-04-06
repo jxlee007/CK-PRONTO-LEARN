@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width , intial-scale=1.0">
+        <title>sample code for sample</title>
+
+        <link rel="stylesheet" href="form.css">
+
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600&display=swap');
+        </style>
+        
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="wrap-c">
+                <form action="post">
+
+                    <div>
+                        <span class="m-head">Contact Us</span>
+                    </div>
+
+                    <div class="wrap-input">
+                        <span class="label-input">Your Name</span>
+                        <input class="input" type="text" placeholder="Enter your name" data-validate="Name is required" autocomplete>
+                        <span class="focus-input"></span>
+                    </div>
+
+                    <div class="wrap-input">
+                        <span class="label-input">Email</span>
+                        <input class="input" type="text" placeholder="Enter your email address" data-validate="Valid email is required">
+                        <span class="focus-input"></span>
+                    </div>
+
+                    <div class="wrap-input">
+                        <span class="label-input">Needed Services</span>
+                        <div>
+                            <select class="select-1" name="Services">
+                                <option value="#">Choose services</option>
+                                <option>Online Store</option>
+                                <option>eCommerce Bussiness</option>
+                                <option>UI/UX Design</option>
+                                <option>Online Services</option>
+                            </select>
+                        </div>
+                        <span class="focus-input"></span>
+                    </div>
+
+                    <div class="wrap-input">
+                        <span class="label-input">Budget</span>
+                        <div>
+                            <select class="select-2" name="budget">
+                                <option value="#">Select Budget</option>
+                                <option>1500 $</option>
+                                <option>2000 $</option>
+                                <option>2500 $</option>
+                            </select>
+                        </div>
+                        <span class="focus-input"></span>
+                    </div>
+
+                    <div class="wrap-input">
+                        <span class="label-input">Your Message</span>
+                        <textarea name="msg" id="msg" cols="30" rows="10"></textarea>
+                        <span class="focus-input"></span>
+                    </div>
+
+                    <div class="wrap-input">
+                        <input class="button" type="submit" value="SUBMIT">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        
+        /* .myDIV:hover + .hide {
+        display: block;
+        color: red;
+        }  */
+
+        h2 {
+            color: #4287f5;
+        }
+
+        div {
+            display: none;
+            border: 5px double #b4b8bf;
+        }
+
+        a {
+            cursor: pointer;
+        }
+
+        /* new learning */
+        /* css combinator */
+        a:hover + div {
+            display: block;
+            color: #4287f5;
+            font-size: 20px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h2>Display an Element on Hover</h2>
+    <b>Hover the element displayed below to see the div element. </b><br><br>
+    <a href="https://www.w3docs.com/">W3docs</a>
+
+    <div class="myDIV">
+        <ul type="none">
+            <li >all</li>
+            <li>print</li>
+            <li>lr preset</li>
+            <li>video luts</li>
+            <li>motion gfx</li>
+            <li>sound fx</li>
+            <li>gear</li>
+        </ul>
+    </div>
+
+</body>
+</html>

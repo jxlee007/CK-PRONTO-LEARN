@@ -1,0 +1,36 @@
+nav
+{
+    z-index: 1;
+    position: fixed; 
+    margin: auto;
+    width: 100%;
+    top: 60px;
+    float: inline-start;
+    background-color: blueviolet;
+    overflow: hidden;
+}
+
+
+.link a
+{
+    color: aquamarine;
+    padding: 20px;
+    float: left;  
+}
+
+.link a:hover
+{
+    color: yellow;
+    text-decoration: none;
+}
+
+a:hover
+{
+    color: yellow;
+    text-decoration: none;
+}
+
+.clip-c
+{
+    clip-path: circle(42.0% at 50% 50%);
+}

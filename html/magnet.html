@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>magnet</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(at 100% 100%, rgba(129, 104, 206, 1) 20%, rgba(156, 171, 207, 1) 100%);
+            box-shadow: 4px 4px 20px 4px rgba(156, 171, 207, 0.17);
+            width: 250px;
+            height: 250px;
+            border-radius: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <button> hover me </button>
+
+
+      <!-- GSAP -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        magnet = () => {
+            const button = document.querySelector('button');
+            let boundingRect = button.getBoundingClientRect();
+
+            window.addEventListener('resize', () => {
+                boundingRect = button.getBoundingClientRect();
+            });
+
+            button.addEventListener('mousemove', (e) => {
+                const mousePosX = e.pageX - boundingRect.left;
+                const mousePosY = e.pageY - boundingRect.top;
+                gsap.to(button, {
+                    x: (mousePosX - boundingRect.width / 2) * 0.4,
+                    y: (mousePosY - boundingRect.height / 2) * 0.4,
+                    duration: 0.8,
+                });
+            });
+
+            button.addEventListener('mouseleave', () => {
+                gsap.to(button, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.8,
+                    ease: 'elastic.out(1,0.3)'
+                });
+            });
+        }
+
+        magnet();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width , intial-scale=1.0">
+    <title >improved Contact Form</title>
+    <link rel="stylesheet" href="form.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600&display=swap');
+      </style>
+</head>
+
+
+
+<!-- we declare classes so we can have clean code have minimal required properties
+    in style tag or css file . it give me more control over differ element  I want to design
+1. main-h = heading
+2. focus-input = for line animation
+3. select-1 = for designing drop-down list
+2. data-validate = validation (needed during testing phase)-->
+
+
+
+<body>
+    <div class="container">
+        <form action="get">
+            <h1 class="main-h" align="center">Contact Us</h1>
+
+            <div>
+                
+                    <span>
+                        <label> Your Name</label>
+                        <input type="text" id="name" placeholder="Enter your name" required autocomplete>
+                    </span>
+                <!--for animated horizontal rule-->
+                    <span class="focus-input"></span>
+            </div>
+
+            <div>
+                <p>
+                    <label>Email</label><br>
+                    <input type="email" placeholder="Enter your email address">
+                </p>
+                
+            </div>
+
+            <div class="select-1">
+                <p>
+                    <label for="ns">Needed Services</label><br>
+                    
+                        <select id="ns" >
+                            <option value="#" class="inherit">Choose Services</option>
+                            <option value="1">Online Store</option>
+                            <option value="2">eCommerce business</option>
+                            <option value="3">UI/UX Design</option>
+                            <option value="4">Online Services</option>
+                        </select>
+                    
+                </p>
+                
+                <p>
+                    <label for="bugdet">Bugdet</label><br>
+                
+                    <select id="bugdet">
+                        <option value="#" class="inherit">Select Bugdet &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</option>
+                        <option value="a">1500 $ &nbsp;</option>
+                        <option value="b">2000 $ &nbsp;</option>
+                        <option value="c">2500 $ &nbsp;</option>
+                    </select>
+                 </p>
+                 
+            </div>
+
+            <div>
+                <p>
+                    <label>Message</label><br>
+                    <textarea id="msg" cols="40" rows="5">Enter your message here</textarea>
+                 </p>
+            </div>
+
+             <p align="center">
+                <input type="submit" id="submit" value="SUBMIT">
+             </p>
+        </form>
+    </div>
+</body>
+
+<!-- comments -->
+
+
+</html>

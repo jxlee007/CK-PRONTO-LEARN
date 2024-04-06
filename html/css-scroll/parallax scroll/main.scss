@@ -1,0 +1,92 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+@mixin align-center {
+    display: flex;
+    justify-content: center;
+    align-items: center  ;
+}
+
+body{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 4vw;
+    color: #fff;
+
+    .wrapper{
+        height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+        perspective: 300px;
+    
+        .intro_scr{
+            height: 100vh;
+            background: url('pg-1.jpg');
+            background-size: 120%;
+            background-position: top-center;
+            background-repeat: no-repeat;
+            @include align-center();
+        }
+    
+        .outro_scr{
+            height: 100vh;
+            background-color: teal;
+            @include align-center();
+        }
+    
+        .parallax_grp{
+            position: relative;
+            height: 100vh;
+            transform-style: preserve-3d;
+
+            .para_lay{
+                position: absolute;
+                inset: 0;
+                @include align-center();
+            }
+
+            .base_lay{
+                // scale calculation: 1 + (Z transform value * -1 / perspective)
+                transform: translateZ(-300px) scale(2);
+                
+            }
+
+            .mid_lay{
+                transform: translateZ(0);
+            }
+
+            .top_lay{
+                transform: translateZ(210px) scale(0.3);
+            }
+        }
+
+        #intro{
+            z-index: 0;
+        }
+
+        #grp-1{
+            z-index: -1;
+        }
+
+        #grp-1 > .base_lay{
+            background: url('pl-2.jpg');
+            background-size: 100%;
+            background-position: top-center;
+            background-repeat: no-repeat;
+
+        } 
+
+        // #grp-2{}
+
+        #grp-2 > .mid_lay{
+            background: url('pl-3.jpg');
+            background-size: 100%;
+            background-position: top-center;
+            background-repeat: no-repeat;
+        } 
+
+        // #outro{}
+    }
+}
+

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width , intial-scale=1.0">
+    <title >flex card</title>
+
+    <style>
+        .container
+        {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center  ;
+            flex-wrap: wrap;
+        }
+
+        .card
+        {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 1rem;
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 100px;
+            order: 1;
+            padding: 50px 30px 30px 30px ;
+            
+        }
+
+        .button
+        {
+            
+            padding: 10px 30px;
+            border-radius: 5px;
+            border: none;
+            background-color: lime;
+            font-style: oblique;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        #card-1
+        {
+            background-color: aquamarine;
+        }
+
+        #card-2
+        {
+            background-color: blueviolet;
+        }
+
+        #card-3
+        {
+            background-color: brown;
+        }
+    </style>
+
+
+</head>
+
+
+
+<body>
+    <div class="container">
+        
+            <div class="card" id="card-1">
+                <img src="img-1.jpeg" alt="card">
+                <h2 id="head">card-1</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla impedit, ratione cumque voluptatibus neque eligendi deleniti libero nobis voluptates consectetur odit a magni debitis iusto repellat sit voluptatum, quae facere officia obcaecati temporibus laudantium, cum suscipit. Asperiores minima vero accusamus architecto nisi, fugit alias odio temporibus! Voluptatibus minima molestiae distinctio!</p>
+                <input class="button" type="button" value="book now">
+            </div>
+            <div class="card" id="card-2">
+                <img src="img-2.jpeg" alt="card">
+                <h2 id="head"> card</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime veritatis iste vitae, similique tempora eaque culpa a delectus! Corporis harum obcaecati quod et quidem velit facere, ut sapiente assumenda facilis aliquam asperiores quis quibusdam perspiciatis labore eos maxime nihil, ipsa, necessitatibus officiis explicabo dolorum voluptatibus consequuntur! Doloremque aut sit nulla?</p>
+                <input class="button" type="button" value="book now">
+            </div>
+            <div class="card" id="card-3">
+                <img src="img-3.jpeg" alt="card">
+                <h2 id="head">card</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat id molestiae error facilis minus quasi, culpa quae ut alias eligendi? Fugiat tempore harum recusandae, iusto commodi deleniti sed rem quod impedit nesciunt veniam velit. Doloribus laborum voluptatum provident autem maxime, asperiores quae in! Aut iusto dolorem cum est molestias? Obcaecati!</p>
+                <input class="button" type="button" value="book now">
+            </div>
+        
+    </div>
+
+
+
+</body>
+
+<!-- comments -->
+
+

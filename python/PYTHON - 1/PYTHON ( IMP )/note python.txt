@@ -1,0 +1,2 @@
+ # We can give index for number taken as input from user to print in it output string of a result for example (python code)
+print ("THE SUM OF {0} and {1} = {2}".format(num1,num2,add))

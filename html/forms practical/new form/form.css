@@ -1,0 +1,86 @@
+*
+{
+    box-sizing: border-box;
+}
+
+.container
+{
+    background-color: white;
+    border: 1px solid whitesmoke;
+    border-radius: 10px;
+    width: 500px;
+    overflow: hidden;
+    padding: 42px 55px 100px;
+    
+}
+
+body
+{
+    margin: 5% 30% ;
+    padding: 42px 55px 45px;
+    background: linear-gradient(to left, #cc33ff 0%, #33cccc 100%);
+    /* it specifies that the background should be a linear gradient 
+    that transitions from the color #cc33ff to #33cccc, 
+    going from left to right. 
+    The to left value indicates the direction of the gradient, 
+    and the color values are specified using hexadecimal notation. 
+    The 0% and 100% values indicate the starting and ending positions of the color transition*/
+}
+
+label
+{
+    padding: 8px 0px;
+    overflow: visible;
+}
+
+div
+{
+    padding: 10px 0px;
+}
+
+input[type=text],
+input[type=email],
+textarea,
+select
+{
+    width: 100%;
+    display: block;
+    overflow: visible;
+    font-size: larger;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin: 0px;
+    touch-action: manipulation;
+    box-sizing: inherit;
+    background-color: #fff;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#submit
+{
+    background: linear-gradient(to left, #cc33ff 0%, #33cccc 100%);   
+    padding: 20px 100px 20px 100px ;
+    border: none;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: bolder;
+    color: antiquewhite;
+    cursor: pointer;
+   
+}
+
+#submit:hover
+{
+    background: linear-gradient(to right, #cc33ff 0%, #33cccc 100%);   
+    padding: 20px 100px 20px 100px ;
+    border: none;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: bolder;
+    color: antiquewhite;
+    cursor: pointer;
+    /* transform: translateX(10px); */
+    
+
+}

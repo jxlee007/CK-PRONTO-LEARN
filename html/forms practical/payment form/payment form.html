@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width , intial-scale=1.0">
+    <title >PAYMENT FORM</title>
+    <link rel="stylesheet" href="payment form.css">
+</head>
+
+<body>
+    <div class="container">
+        <form action="post">
+            <h1 class="main-head">Payment form</h1>
+                <h2> User Details</h2>
+                
+                <p>Enter Name: <input type="text" placeholder="Enter name" id="name" required autocomplete="name"></p>
+                <p>Email: <input type="email" placeholder="Enter mail" id="email"></p>
+        
+        <!--we can use fieldset to create group like in gender tag
+        in that legend tag can be used fo giving name yo the group-->
+        
+                <fieldset>
+                    <legend>Gender</legend>
+                        <p>
+                            Male <input type="radio" id="male" value="male">
+                            Female <input type="radio" id="female" value="female">
+                        </p>
+                </fieldset>
+        
+                <p>
+                    <label for="cdtype">Address: </label><br>
+                    <textarea id="address" cols="100" rows="8">Enter address</textarea>
+                </p>
+        
+                <p>
+                    <label>Pincode:</label>
+                    <input type="number" placeholder ="123456" id ="pincode">
+                </p>
+        
+                <h2>Payment Details</h2>
+                <p>
+                    <label for="cdtype">Card Type:</label>  
+                    <select id="cdtype" name="cdtype">
+                        <option value="">--Select card type--</option>
+                        <option value="credit">Credit Card</option>
+                        <option value="debit">Debit Card</option>
+                    </select>
+                </p>
+        
+        <!--for validation message span tag class tag  -->
+        
+                <p>
+                    <label for="cdno">Card Number:</label><br>
+                    <input type="number" placeholder="1111-2222-3333-4444"id="cdno"><br>
+                    <span id="vmsg" class="validation-message"> Plz add valid card number </span>
+                </p>
+                <p>
+                    <label for="exp">Expiry Date:</label>
+                    <input type="date" name="exp" id="exp"></p>
+        
+                <p>
+                    <label for="cvv">CVV:</label>
+                    <input type="password" placeholder="123" id="cvv"> 
+                </p>
+        
+                <p> <input type="submit" id="submit" value="Pay now" ></p>
+        
+             </form>
+    </div>
+  
+</body>
+
+<!-- comments -->
+
+
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Gilroy";
+}
+html , body{
+    height: 100%;
+    width: 100%;
+}
+
+::selection{
+    color: rgb(255,158,0);
+    color: -moz-linear-gradient(90deg, rgba(255,158,0,1) 6%, rgba(255,94,0,1) 59%);
+    color: -webkit-linear-gradient(90deg, rgba(255,158,0,1) 6%, rgba(255,94,0,1) 59%);
+    color: linear-gradient(90deg, rgba(255,158,0,1) 6%, rgba(255,94,0,1) 59%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff9e00",endColorstr="#ff5e00",GradientType=1);
+}

@@ -59,3 +59,9 @@ let add = (a) => {
 }
 console.log(add())
 // --------------------------------------------------------
+
+// async await is used when third party code is used
+// await can work without async
+let async = await fetch("https://randomuser.me/api/")
+let data = await async.json()
+console.log(data)

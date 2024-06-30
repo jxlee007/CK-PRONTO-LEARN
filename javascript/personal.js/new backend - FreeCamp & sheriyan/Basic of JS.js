@@ -18,7 +18,7 @@ let map = a.map(val => {
 // filter = remove some keep some 
 
 let filter = a.filter(val => {
-    if(val > 12){return true}
+    if(val > 1){return true}
     // else {return false};
 })
 
@@ -57,11 +57,11 @@ let add = (a) => {
     let c = "hello";
     return c;
 }
-console.log(add())
+// console.log(add())
 // --------------------------------------------------------
 
 // async await is used when third party code is used
 // await can work without async
 let async = await fetch("https://randomuser.me/api/")
 let data = await async.json()
-console.log(data)
+// console.log(data)

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+  <b:skin><![CDATA[
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fdf1dc;
+}
+
+header {
+    background-color: #fdf1dc;
+    padding: 20px;
+    text-align: center;
+}
+
+.header-content h1 {
+    font-size: 3em;
+    color: #7b3f00;
+}
+
+.header-content p {
+    font-size: 1.2em;
+    color: #5a3b1e;
+}
+
+.btn-launch, .btn-learn-more {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    background-color: #ffbb33;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn-launch:hover, .btn-learn-more:hover {
+    background-color: #ff9900;
+}
+
+.featured-articles {
+    background-color: #fef6e4;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.featured-articles h2 {
+    font-size: 2.5em;
+    color: #7b3f00;
+}
+
+.article-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 30%;
+    margin: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+}
+
+.card h3 {
+    color: #7b3f00;
+    margin-top: 10px;
+}
+
+.card p {
+    color: #5a3b1e;
+}
+
+.btn-read-more {
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    background-color: #ffbb33;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn-read-more:hover {
+    background-color: #ff9900;
+}
+
+.about-me {
+    background-color: #fdf1dc;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.about-me h2 {
+    font-size: 2.5em;
+    color: #7b3f00;
+}
+
+.about-me img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
+.about-me p {
+    color: #5a3b1e;
+    margin-top: 20px;
+}
+
+.social-links a {
+    margin: 10px;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.social-links .twitter {
+    background-color: #1da1f2;
+}
+
+.social-links .github {
+    background-color: #333;
+}
+
+.social-links .linkedin {
+    background-color: #0077b5;
+}
+
+.social-links a:hover {
+    opacity: 0.8;
+}
+
+footer {
+    background-color: #7b3f00;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    width: 30%;
+    margin: 10px 0;
+}
+
+.footer-section h3 {
+    color: #ffbb33;
+}
+
+.footer-section p, .footer-section a {
+    color: #fff;
+}
+
+.footer-section a {
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+}
+
+.footer-note {
+    margin-top: 20px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .article-cards, .footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card, .footer-section {
+        width: 80%; /* Adjust card and footer section width on smaller screens */
+    }
+
+    .header-content h1 {
+        font-size: 2em; /* Adjust header font size on smaller screens */
+    }
+
+    .featured-articles h2, .about-me h2 {
+        font-size: 2em; /* Adjust featured articles and about me headings on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .btn-launch, .btn-learn-more, .btn-read-more {
+        width: 100%; /* Full width buttons on very small screens */
+        margin: 10px 0;
+    }
+}
+  ]]></b:skin>
+</head>
+<body>
+  <header>
+    <div class='header-content'>
+      <h1>From Frontend to Full Stack</h1>
+      <p>Embark on a journey to expand your coding horizons. Discover the world of Node.js, Express, and EJS to bring your projects to life with dynamic backend functionalities.</p>
+      <button class='btn-launch'>Launch</button>
+      <button class='btn-learn-more'>Learn More</button>
+    </div>
+  </header>
+
+  <b:section id='main-section'/>
+
+  <footer>
+    <div class='footer-content'>
+      <div class='footer-section'>
+        <h3>Frontend to Backend</h3>
+        <p>Dive into the full stack journey with me. Learn, code, and conquer the world of Node.js, Express.js, and EJS.</p>
+      </div>
+      <div class='footer-section'>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href='/'>Home</a></li>
+          <li><a href='/articles'>Articles</a></li>
+          <li><a href='/about'>About</a></li>
+        </ul>
+      </div>
+      <div class='footer-section'>
+        <h3>Connect</h3>
+        <a href='https://twitter.com/yourprofile'>Twitter</a>
+        <a href='https://github.com/yourprofile'>GitHub</a>
+        <a href='https://linkedin.com/in/yourprofile'>LinkedIn</a>
+      </div>
+    </div>
+    <p class='footer-note'>&#169; 2023 Frontend to Backend. All rights reserved.</p>
+  </footer>
+</body>
+</html>

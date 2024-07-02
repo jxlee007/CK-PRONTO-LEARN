@@ -3,41 +3,83 @@
 // It helps us develop asynchronous JavaScript code and keeps us safe from problems and errors.
 // File system module/packages with callback APIs = require console.log to run
 const fs = require("node:fs");
+// const fs = require("node:fs").promises; // for readasync
 
 // write file - to create a file
 // syntax: fs.writeFile("filename","content",(err) => {});
 // callback = fnc
 
-let create = () => fs.writeFile("faltu.txt","char baj gaye lekin party abhi baki hai",(err) => {
-    err ? console.error(err): console.log("File created")
+let create = () => fs.writeFile("faltu.txt", "char baj gaye lekin party abhi baki hai", (err) => {
+    err ? console.error(err) : console.log("File created")
 });
 
 // To add something in content of file
 // syntax: fs.appendFile("filename","content",(err) => {});
 
-let update = () => fs.appendFile("faltu.txt"," Hello Mr. DJ mera gaana please play Aaj no wine, aaj no laaga, aaj piyenge champagne",(err) => {
-    err ? console.error(err): console.log("File appended");
+let update = () => fs.appendFile("faltu.txt", " Hello Mr. DJ mera gaana please play Aaj no wine, aaj no laaga, aaj piyenge champagne", (err) => {
+    err ? console.error(err) : console.log("File appended");
 });
+// ----------------------------------------------------------------------------
+// to read file
+// syntax: fs.readFile("filename","encoding",(err,data) => {});
+// without ("node.fs").promises = read = expected result -> Error: undefined then result
+// with ("node.fs").promises = readasync = expected result -> promise{<pending>} 
 
+let read = () => fs.readFile("song.txt","utf-8",(err,data) => {
+    err ? console.error(err.message): console.log(data);
+}); //Expected output: Error: undefined then result
+console.log(read());
 
+// require("node:fs").promises
+// with console.log = undefined then result
+// direct fnc run = expected result = write way to handle
+let readasync = () => {
+    // Define the async function to read and log file content
+    async function readFileAndLog(filePath) {
+        try {
+            const data = await fs.readFile(filePath, 'utf-8');
+            console.log(`File content of ${filePath}:`);
+            console.log(data);
+            return data; // Optionally return data if needed
+        } catch (err) {
+            console.error(`Error reading the file ${filePath}:`, err);
+            throw err; // Rethrow the error if further handling is needed
+        }
+    }
+
+    // Immediately Invoked Function Expression (IIFE) to execute async operations
+    (async () => {
+        try {
+            const filePath = 'song.txt'; // Replace with your file path
+            const fileContent = await readFileAndLog(filePath);
+            console.log('File read successfully.');
+            // Further processing with fileContent if needed
+        } catch (err) {
+            console.error('Failed to read file:', err);
+        }
+    })();
+};
+// readasync();
+
+// ----------------------------------------------------------------------------------
 // to rename file
 // syntax: fs.rename("filename","newfilename",(err) => {});
 
-let rename = () => fs.rename("faltu.txt","song.txt",(err) => {
-    err ? console.error(err): console.log("File renamed");
+let rename = () => fs.rename("faltu.txt", "song.txt", (err) => {
+    err ? console.error(err) : console.log("File renamed");
 });
 
 // To copy a file 
 // syntax: fs.copyFile("filename","dest/newfilename",(err)=>{});
 
-let copy = (a) => fs.copyFile("song.txt","./copy2/copied-song.txt", (err) =>{
-        err ? console.error(err.message) : console.log("Copied Successfully");
-    });
+let copy = (a) => fs.copyFile("song.txt", "./copy2/copied-song.txt", (err) => {
+    err ? console.error(err.message) : console.log("Copied Successfully");
+});
 
 // to delete a file
 // syntax: fs.unlink("dest/filename",callback)
 
-let remove = () => fs.unlink ("./copy/copied-song.txt",(err) => {
+let remove = () => fs.unlink("./copy/copied-song.txt", (err) => {
     err ? console.error(err) : console.log("file deleted");
 });
 
@@ -46,7 +88,7 @@ let remove = () => fs.unlink ("./copy/copied-song.txt",(err) => {
 // by default - only blank folders
 // options - recursive mode - to delete folder with files - {recursive: true}
 
-let rmdir = () => fs.rm("./test",{recursive: true},(err) => {
+let rmdir = () => fs.rm("./test", { recursive: true }, (err) => {
     err ? console.error(err.message) : console.log("folder deleted");
 });
 // ----------------------------------------------------------------------------------------
@@ -69,7 +111,7 @@ let check = fs.existsSync("http-module.js");
 
 // to reading file with sync method
 // Syntax: fs.readFileSync("filename.ext")
-let read = fs.readFileSync("node.js");
+let readsync = fs.readFileSync("node.js");
 // console.log("Content = " + read);
 // with , comma the expected result is buffer data
 // with + concate the expected result is string data

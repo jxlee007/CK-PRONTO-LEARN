@@ -1,6 +1,7 @@
 "use strict";
-
-// File system module/packages with callback and sync APIs
+// Callbacks are used to make sure that a function is not going to run before a task is completed but will run right after the task has completed. 
+// It helps us develop asynchronous JavaScript code and keeps us safe from problems and errors.
+// File system module/packages with callback APIs = require console.log to run
 const fs = require("node:fs");
 
 // write file - to create a file
@@ -48,6 +49,29 @@ let remove = () => fs.unlink ("./copy/copied-song.txt",(err) => {
 let rmdir = () => fs.rm("./test",{recursive: true},(err) => {
     err ? console.error(err.message) : console.log("folder deleted");
 });
+// ----------------------------------------------------------------------------------------
+// File system module/packages with Synchronous APIs
+// to create folder
+//  Sync = Synchornous API
+// fs.mkdirSync("Test-Dir") - runs directly
 
+// to read folder
+let FolderPath = "G:\\GSD\\learn\\javascript\\personal.js\\new backend - FreeCamp & sheriyan\\NODE\\Test-Dir";
+let fc = fs.readdirSync(FolderPath);
+// console.log("Files in folder: " + fc); //Expected output: Files in folder: dummy.txt = bcoz of + concate
+// console.log("Files in folder: ", fc); //Expected output: Files in folder: [ 'dummy.txt' ] = bcoz of , comma
+
+// to see if folder/file exists
+// Syntax: fs.existsSync("filename/foldername")
+let check = fs.existsSync("http-module.js");
+// console.log(check); //Expected output: boolean value
+// ---------------------------------------------------------------------------------------------------------
+
+// to reading file with sync method
+// Syntax: fs.readFileSync("filename.ext")
+let read = fs.readFileSync("node.js");
+// console.log("Content = " + read);
+// with , comma the expected result is buffer data
+// with + concate the expected result is string data
 
 

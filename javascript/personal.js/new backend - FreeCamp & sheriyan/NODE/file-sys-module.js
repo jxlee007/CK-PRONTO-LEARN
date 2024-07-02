@@ -2,8 +2,8 @@
 // Callbacks are used to make sure that a function is not going to run before a task is completed but will run right after the task has completed. 
 // It helps us develop asynchronous JavaScript code and keeps us safe from problems and errors.
 // File system module/packages with callback APIs = require console.log to run
-const fs = require("node:fs");
-// const fs = require("node:fs").promises; // for readasync
+// const fs = require("node:fs");
+const fs = require("node:fs").promises; // for readasync
 
 // write file - to create a file
 // syntax: fs.writeFile("filename","content",(err) => {});
@@ -27,39 +27,17 @@ let update = () => fs.appendFile("faltu.txt", " Hello Mr. DJ mera gaana please p
 
 let read = () => fs.readFile("song.txt","utf-8",(err,data) => {
     err ? console.error(err.message): console.log(data);
-}); //Expected output: Error: undefined then result
-console.log(read());
+});
 
-// require("node:fs").promises
-// with console.log = undefined then result
-// direct fnc run = expected result = write way to handle
-let readasync = () => {
-    // Define the async function to read and log file content
-    async function readFileAndLog(filePath) {
-        try {
-            const data = await fs.readFile(filePath, 'utf-8');
-            console.log(`File content of ${filePath}:`);
-            console.log(data);
-            return data; // Optionally return data if needed
-        } catch (err) {
-            console.error(`Error reading the file ${filePath}:`, err);
-            throw err; // Rethrow the error if further handling is needed
-        }
+async function readAsync() {
+    try {
+        const data = await fs.readFile("song.txt", "utf-8");
+        console.log(data);
+    } catch (err) {
+        console.error(err.message);
     }
-
-    // Immediately Invoked Function Expression (IIFE) to execute async operations
-    (async () => {
-        try {
-            const filePath = 'song.txt'; // Replace with your file path
-            const fileContent = await readFileAndLog(filePath);
-            console.log('File read successfully.');
-            // Further processing with fileContent if needed
-        } catch (err) {
-            console.error('Failed to read file:', err);
-        }
-    })();
-};
-// readasync();
+}
+readAsync();
 
 // ----------------------------------------------------------------------------------
 // to rename file
@@ -99,19 +77,19 @@ let rmdir = () => fs.rm("./test", { recursive: true }, (err) => {
 
 // to read folder
 let FolderPath = "G:\\GSD\\learn\\javascript\\personal.js\\new backend - FreeCamp & sheriyan\\NODE\\Test-Dir";
-let fc = fs.readdirSync(FolderPath);
+// let fc = fs.readdirSync(FolderPath);
 // console.log("Files in folder: " + fc); //Expected output: Files in folder: dummy.txt = bcoz of + concate
 // console.log("Files in folder: ", fc); //Expected output: Files in folder: [ 'dummy.txt' ] = bcoz of , comma
 
 // to see if folder/file exists
 // Syntax: fs.existsSync("filename/foldername")
-let check = fs.existsSync("http-module.js");
+// let check = fs.existsSync("http-module.js");
 // console.log(check); //Expected output: boolean value
 // ---------------------------------------------------------------------------------------------------------
 
 // to reading file with sync method
 // Syntax: fs.readFileSync("filename.ext")
-let readsync = fs.readFileSync("node.js");
+// let readsync = fs.readFileSync("node.js");
 // console.log("Content = " + read);
 // with , comma the expected result is buffer data
 // with + concate the expected result is string data

@@ -2,8 +2,8 @@
 // Callbacks are used to make sure that a function is not going to run before a task is completed but will run right after the task has completed. 
 // It helps us develop asynchronous JavaScript code and keeps us safe from problems and errors.
 // File system module/packages with callback APIs = require console.log to run
-// const fs = require("node:fs");
-const fs = require("node:fs").promises; // for readasync
+const fs = require("node:fs");
+// const fs = require("node:fs").promises; // for readasync
 
 // write file - to create a file
 // syntax: fs.writeFile("filename","content",(err) => {});
@@ -37,7 +37,7 @@ async function readAsync() {
         console.error(err.message);
     }
 }
-readAsync();
+// readAsync();// require ("fs").promises to run
 
 // ----------------------------------------------------------------------------------
 // to rename file
@@ -77,19 +77,19 @@ let rmdir = () => fs.rm("./test", { recursive: true }, (err) => {
 
 // to read folder
 let FolderPath = "G:\\GSD\\learn\\javascript\\personal.js\\new backend - FreeCamp & sheriyan\\NODE\\Test-Dir";
-// let fc = fs.readdirSync(FolderPath);
+let fc = fs.readdirSync(FolderPath);
 // console.log("Files in folder: " + fc); //Expected output: Files in folder: dummy.txt = bcoz of + concate
 // console.log("Files in folder: ", fc); //Expected output: Files in folder: [ 'dummy.txt' ] = bcoz of , comma
 
 // to see if folder/file exists
-// Syntax: fs.existsSync("filename/foldername")
+Syntax: fs.existsSync("filename/foldername")
 // let check = fs.existsSync("http-module.js");
 // console.log(check); //Expected output: boolean value
 // ---------------------------------------------------------------------------------------------------------
 
 // to reading file with sync method
 // Syntax: fs.readFileSync("filename.ext")
-// let readsync = fs.readFileSync("node.js");
+let readsync = fs.readFileSync("node.js");
 // console.log("Content = " + read);
 // with , comma the expected result is buffer data
 // with + concate the expected result is string data

@@ -4,8 +4,12 @@
   "description": "",
   "main": "node.js",
   "scripts": {
+    "start": "node ./NODE/server-express.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "JXLEE",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
 }

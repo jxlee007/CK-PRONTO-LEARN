@@ -35,7 +35,7 @@ app.get("/profile",(req,res,next) =>{
 // default error handler
 app.use((err,req,res,next)=>{
     console.error(err.stack)
-    res.status(500).send("messed up")
+    res.status(500).end("messed up")
 })
 
 // console.log("Server running on port 8000");

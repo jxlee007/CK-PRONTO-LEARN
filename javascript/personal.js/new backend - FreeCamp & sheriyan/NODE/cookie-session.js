@@ -3,7 +3,7 @@ let express = require('express');
 let app = express();
 
 // before this install cookie-parser package
-// for conversion of stream/blob into readable json format
+// for conversion of data-stream/blob into readable json format
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 

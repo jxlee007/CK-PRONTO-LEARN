@@ -1,3 +1,5 @@
+// handling backend processs from any framework, library, templating engine
+// we use cookie-session
 // Creating server with Express.js
 let express = require('express');
 let app = express();
@@ -10,9 +12,6 @@ app.use(express.urlencoded({extended:true}));
 app.get('/', (req, res) => {
     res.end('Hello World!');
 });
-
-
-
 
 // default error handler
 app.use((err,req,res,next)=>{

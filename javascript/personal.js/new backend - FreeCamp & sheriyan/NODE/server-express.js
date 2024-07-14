@@ -2,6 +2,9 @@
 let express = require('express');
 let app = express();
 
+// middleware = connect one Http req to another Http req
+app.use(express.json());
+
 const courses = [
     { id: 1, name: 'html' },
     { id: 2, name: 'java' },
@@ -11,6 +14,21 @@ const courses = [
 
 app.get('/', (req, res) => {
     res.end('Hello World!');
+});
+
+app.get("/courses",(req,res)=>{
+    res.json(courses);
+});
+
+// to add data in json
+// post = add/create
+app.post("/courses", (req,res) => {
+     const course = {
+        id : courses.length + 1,
+        name : req.body.name,
+     } 
+     courses.push(course);
+        res.json(course);
 });
 
 

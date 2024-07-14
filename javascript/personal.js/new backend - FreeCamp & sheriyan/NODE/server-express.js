@@ -20,8 +20,17 @@ app.get("/courses",(req,res)=>{
     res.json(courses);
 });
 
+// route params = /:param
+// route params comes in req.params
+// multiple route handling
+// parseint is used to convert string to int
+app.get('/courses/:name', (req, res) => {
+    let course = courses.find(course => course.name === req.params.name);
+    res.end(`You are viewing course ${course.name} with id ${course.id}`);
+});
+
 // to add data in json
-// post = add/create
+// post method = add/create
 app.post("/courses", (req,res) => {
      const course = {
         id : courses.length + 1,
@@ -31,15 +40,31 @@ app.post("/courses", (req,res) => {
         res.json(course);
 });
 
-
-// route params = /:param
-// route params comes in req.params
-// multiple route handling
-// parseint is used to convert string to int
-app.get('/courses/:name', (req, res) => {
+// put method
+// data is updated in server memory
+app.put("/courses/:name", (req,res) => {
     let course = courses.find(course => course.name === req.params.name);
-    res.end(`You are viewing course ${course.name} with id ${course.id}`);
+    // ternary ?: = conditional(if-else)
+    !course ? res.status(404).send("the course you are looking does not exist"): course.name = req.body.name;
+    res.send(course)
 });
+
+// delete method 
+// delete can only used once on route
+// always have approach through delete by id
+app.delete("/courses/:id",(req,res)=>{
+    // parseint is used to convert string to int
+    let course = courses.find(course => course.id === parseInt(req.params.id));
+    if(!course) res.status(404).send("the course you are looking does not exist");
+
+    // Splice = (from index, to how many)
+    const index = courses.indexOf(course)
+    courses.splice(index, 1)
+
+    res.send(course)
+});
+
+
 
 // requesthandler = (req, res) => {} is middleware
 // error flow
@@ -56,6 +81,6 @@ app.use((err,req,res,next)=>{
     res.status(500).end("messed up")
 })
 
-// console.log("Server running on port 8000");
 
 app.listen(8000);
+// console.log("Server running on port 8000"); // without nodemon

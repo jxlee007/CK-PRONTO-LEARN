@@ -6,8 +6,9 @@ let app = express();
 
 // before this install cookie-parser package
 // for conversion of data-stream/blob into readable json format
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.json()); // JSON Parser
+// helps server to read form data
+app.use(express.urlencoded({extended:true})); //URL-Encoded/Form Data Parser
 
 app.get('/', (req, res) => {
     res.end('Hello World!');

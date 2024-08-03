@@ -10,6 +10,13 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname, "public")));
 
+// to show wihch rout is access on server
+app.use((req, res, next) => {
+    const logMessage = `${req.method} ${req.path} - ${req.ip}`;
+    console.log(logMessage);
+    next(); // Call next() to pass the request to the next middleware/handler
+  });
+
 
 app.get("/",(req,res)=>{
     // res.end("hello world");
@@ -18,6 +25,26 @@ app.get("/",(req,res)=>{
         // console.log(files);
     });
 });
+
+app.get("/file/:filename",(req,res)=>{
+    // res.end("hello world");
+    fs.readFile(`./files/${req.params.filename}`,"utf-8", (err, filedata)=>{
+        res.render("show",{ filename: req.params.filename , filedata:filedata });
+        // console.log(filedata);
+    });
+});
+
+app.get("/edit/:filename",(req,res)=>{
+    res.render("edit", { filename: req.params.filename });
+});
+
+app.post("/edit",(req,res)=>{
+        // console.log(req.body);
+    fs.rename(`./files/${req.body.previous}`,`./files/${req.body.new}`, (err)=>{
+        res.redirect("/");
+    });
+});
+
 
 app.post("/create",(req,res)=>{
     // split and join for removing spaces
@@ -37,10 +64,11 @@ app.post("/create",(req,res)=>{
 //     res.render("index",{username : username});
 // });
 
+// error handler
 app.use((err,req,res,next)=>{
     console.error(err.stack)
     res.status(500).end("messed up")
 })
 
-app.listen(3000);
+app.listen(3000,"0.0.0.0");
 

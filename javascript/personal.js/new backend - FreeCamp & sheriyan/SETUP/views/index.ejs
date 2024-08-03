@@ -19,11 +19,16 @@
             <input class="mt-2 bg-blue-600 px-5 py-2 rounded-md" type="submit" value="Create task">
         </form>
         <div class="tasks p-10 grid grid-cols-4 gap-3">
+            <!-- to print all files if existing in files folder -->
             <% if (files.length > 0) { %>
                 <% files.forEach( function(val){ %>
                     <div class="task w-54 px-3 py-4  bg-zinc-800 rounded-md">
                         <h1 class="text-white text-2xl  tracking-tight"><%= val %></h1>
-                        <a class="text-blue-500 inline-block mt-3 " href="http://">Read more.</a>
+                        <div class=" flex w-full justify-between items-center mt-3">
+                            <a class="text-blue-500 inline-block" href="/file/<%= val %>">Read more.</a>
+                            <a class="text-blue-500 inline-block mt-3 " href="/edit/<%= val %>">Edit</a>
+                        </div>
+                        
                         <!-- <p class="text-white mt-1">Task details: Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita provident commodi dolorum optio?</p> -->
                     </div>
                 <%}); %>

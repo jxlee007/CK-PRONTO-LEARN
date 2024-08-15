@@ -106,11 +106,49 @@ app.get("/rating/:id", async (req, res) => {
 });
 
 
+// Update a document
+app.get("/update/:id", async (req, res) => {
+    const product = await Product.findById  (req.params.id)
+        .then(product => {
+            product.creator = "JXLEE";
+            product.save()
+                .then(() => res.send(product))
+                .catch(err => console.log("Document save error:", err));
+        })
+});
+
 // delete a document
 app.get("/delete/:id", async (req, res) => {
     const product = await Product.findByIdAndDelete(req.params.id)
         .then(product => res.send(product))
         .catch(err => console.log("Document delete error:", err));
+});
+
+
+// Search products with query parameters
+app.get("/search", async (req, res) => {
+    // destructuring the query parameters
+    const { minPrice, maxRating, category } = req.query;
+
+    try {
+        // logical AND operation = T+T=T
+        const products = await Product.find({
+            $and: [
+                { price: { $gte: minPrice } },
+                { rating: { $lte: maxRating } },
+                { category: category }
+            ]
+        });
+
+        if (products.length === 0) {
+            return res.status(404).send("No products found with the specified criteria");
+        }
+
+        res.send(products);
+    } catch (err) {
+        console.log("Error fetching products:", err);
+        res.status(500).send("Error fetching products");
+    }
 });
 
 

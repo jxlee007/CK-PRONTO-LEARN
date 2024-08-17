@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./stylesheets/index.css">
+    <script src="./javascripts/gsap.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/gsap.min.js"></script>
+    <title>User Generating app</title>
+</head>
+
+<body>
+    <div class="main w-full min-h-screen bg-zinc-900 p-10">
+        <div class="nav mb-10">
+            <a href="/read" class="text-blue-500">Read Users</a>
+        </div>
+        <h1 class="text-3xl tracking-tighter mb-4">Create User</h1>
+        <div class="flex justify-between">
+            <form action="/create" method="get">
+            <button type="submit" class=" px-5 py-2 bg-blue-600 rounded-full text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Generate Random User</button>
+            </form>
+            <form action="/create" method="post" class="flex gap-2">
+                <span class="custom flex gap-2 right-0 relative hidden">
+                    <input name="name" type="text" placeholder="name" class="col-span-1 px-5 py-2 rounded border border-gray-700 bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input name="email" type="email" placeholder="email" class="col-span-1 px-5 py-2 rounded border border-gray-700 bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input name="image" type="text" placeholder="image URL" class="col-span-1 px-5 py-2 rounded border border-gray-700 bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </span>
+                <button disabled type="submit" class="custom right-0 px-5 py-3 rounded-full bg-red-500 text-center cursor-pointer">Generate Custom User</button>
+            </form>
+        </div>
+        <hr class="mt-5">
+        <div class="users grid gap-3 grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-5">
+            <% users.forEach(user => { %>
+            <div class="p-3 bg-gray-800 rounded-lg shadow-lg border border-gray-700 ">
+                <div class="w-full h-60 rounded-lg bg-red-500 overflow-hidden">
+                    <img src="<%= user.image %>" class="w-full h-full object-cover object-center" alt="Profile Image">
+                </div>
+                <h3 class="block mb-2 font-sans text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900"><%= user.name %></h3>
+                <h5 class="text-zinc-500"><%= user.email %></h5>
+                <div class="flex gap-3 mt-5 text-center">
+                    <a class="text-zinc-600 w-1/2 bg-white py-2 rounded-lg" href="#">Edit User</a>
+                    <a class="text-white w-1/2 bg-red-500 py-2 rounded-lg" href="/delete/<%= user._id %>">Delete User</a>
+                </div>
+            </div>
+            <% }); %>
+        </div>
+    </div>
+</body>
+
+</html>

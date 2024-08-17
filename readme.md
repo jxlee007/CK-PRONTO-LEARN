@@ -180,8 +180,8 @@
     </thead>
     <tbody>
          <tr>
-            <td width="10%" align="center"><img src="https://skillicons.dev/icons?i=py" height="50" alt="python logo" /></td>
-            <td width="30%">
+            <td align="center"><img src="https://skillicons.dev/icons?i=py" height="50" alt="python logo" /></td>
+            <td>
                 <ul>
                     <li><a href="https://github.com/jxlee007/learn/tree/main/python">python</a>
                         <ul>
@@ -195,7 +195,7 @@
                     </li>
                 </ul>
             </td>
-            <td width="30%">
+            <td>
                 <ul>
                     <li><a href="#">PYTHON - 1</a></li>
                     <ul>
@@ -219,7 +219,7 @@
                     </ul>
                 </ul>
             </td>
-            <td width="30%">
+            <td>
                 <ul>
                     <li><a href="#">notebook</a>
                         <ul>

@@ -20,19 +20,12 @@ app.use((req, res, next) => {
   });
 
 
-app.get("/",(req,res)=>{
-    res.render("loader");
-});
 
-app.get("/random", async (req,res)=>{
+
+app.get("/", async (req,res)=>{
     let users = (await userModel.find()).reverse();
     res.render("random", {users});
 });
-
-app.get("/custom",(req,res)=>{
-    res.render("random");
-});
-
 
 // to create random user effortlessly
 app.get("/create", async (req, res) => {
@@ -62,7 +55,7 @@ app.get("/create", async (req, res) => {
         });
 
         console.log(data);
-        res.redirect("/random");
+        res.redirect("/");
 
         // Save the document to the database
         await user.save();
@@ -88,7 +81,7 @@ app.post("/create", async (req, res) => {
             isPublished: true
         });
         console.log
-        res.redirect("/random");
+        res.redirect("/");
 
         // Save the document to the database
         await user.save();
@@ -99,13 +92,24 @@ app.post("/create", async (req, res) => {
     }
 });
 
+// to update a document
+app.get("/edit/:id", async (req, res) => {
+    const user = await userModel.findById(req.params.id);
+    res.render("edit", {user});
+});
+
+app.post("/edit/:id", async (req, res) => {
+    const user = await userModel.findOneAndUpdate({_id:req.params.id});
+    res.redirect("/", {user});
+});
+
 
 // delete a document
 app.get("/delete/:id", async (req, res) => {
     const user = await userModel.findOneAndDelete({_id:req.params.id})
         .then(user => console.log(user))
         .catch(err => console.log("Document delete error:", err));
-    res.redirect("/random")
+    res.redirect("/")
 });
 
 

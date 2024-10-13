@@ -5,48 +5,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./stylesheets/index.css">
-    <script src="./javascripts/gsap.js"></script>
+    <style>
+        @keyframes highlight {
+            0%, 100% {
+                color: white;
+            }
+            50% {
+                color: #f59e0b; /* Tailwind CSS yellow-500 */
+            }
+        }
+        .highlight-1 {
+            animation: highlight 1s infinite;
+        }
+
+        .highlight-2 {
+            animation: highlight 2s infinite;
+            animation-delay: 1s; /* Starts after highlight-1 finishes */
+        }
+
+        .highlight-3 {
+            animation: highlight 3s infinite;
+            animation-delay: 2s; /* Starts after highlight-2 finishes */
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/gsap.min.js"></script>
-    <title>User Generating app</title>
+    <title>User Generating App</title>
 </head>
 
 <body>
-    <div class="main w-full min-h-screen bg-zinc-900 p-10">
-        <div class="nav mb-10">
-            <a href="/read" class="text-blue-500">Read Users</a>
+    <div class="nav bg-amber-950 h-14 min-w-screen flex items-center justify-center">
+        <div class="flex gap-4 text-3xl tracking-tight font-bold">
+            <h1 class="highlight-1">Generate</h1>
+            <h1 class="highlight-2">Random</h1>
+            <h1 class="highlight-3">Users</h1>
         </div>
-        <h1 class="text-3xl tracking-tighter mb-4">Create User</h1>
-        <div class="flex justify-between">
-            <form action="/create" method="get">
-            <button type="submit" class=" px-5 py-2 bg-blue-600 rounded-full text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Generate Random User</button>
+    </div>
+    <div class="main w-full min-h-screen bg-zinc-900 p-4 md:p-10">
+        <h1 class="text-2xl md:text-3xl tracking-tighter mb-4">Create User</h1>
+        <div class="flex flex-col md:flex-row justify-between mb-5">
+            <form action="/create" method="get" class=" mb-4 md:mb-0">
+                <button type="submit" class="px-5 py-2 bg-blue-600 rounded-full text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Generate Random User</button>
             </form>
-            <form action="/create" method="post" class="flex gap-2">
-                <span class="custom flex gap-2 right-0 relative hidden">
-                    <input name="name" type="text" placeholder="name" class="col-span-1 px-5 py-2 rounded border border-gray-700 bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <input name="email" type="email" placeholder="email" class="col-span-1 px-5 py-2 rounded border border-gray-700 bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <input name="image" type="text" placeholder="image URL" class="col-span-1 px-5 py-2 rounded border border-gray-700 bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </span>
-                <button disabled type="submit" class="custom right-0 px-5 py-3 rounded-full bg-red-500 text-center cursor-pointer">Generate Custom User</button>
-            </form>
+            <button id="openModal" class="px-5 py-2 rounded-full bg-red-500 text-center cursor-pointer">Generate Custom User</button>
         </div>
         <hr class="mt-5">
-        <div class="users grid gap-3 grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-5">
+        <div class="users grid gap-3 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-5">
             <% users.forEach(user => { %>
-            <div class="p-3 bg-gray-800 rounded-lg shadow-lg border border-gray-700 ">
+            <div class="p-3 bg-gray-800 rounded-lg shadow-lg border border-gray-700">
                 <div class="w-full h-60 rounded-lg bg-red-500 overflow-hidden">
                     <img src="<%= user.image %>" class="w-full h-full object-cover object-center" alt="Profile Image">
                 </div>
-                <h3 class="block mb-2 font-sans text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900"><%= user.name %></h3>
-                <h5 class="text-zinc-500"><%= user.email %></h5>
+                <h3 class="block mb-2 font-sans text-xl md:text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900"><%= user.name %></h3>
+                <h5 class="text-zinc-500 text-sm overflow-y-auto"><%= user.creator %></h5>
+                <h5 class="text-zinc-500 text-sm overflow-y-auto"><%= user.email %></h5>
                 <div class="flex gap-3 mt-5 text-center">
-                    <a class="text-zinc-600 w-1/2 bg-white py-2 rounded-lg" href="#">Edit User</a>
-                    <a class="text-white w-1/2 bg-red-500 py-2 rounded-lg" href="/delete/<%= user._id %>">Delete User</a>
+                    <a class="text-zinc-600 w-1/2 bg-white py-2 rounded-lg" href="/edit/<%= user._id %>"><i class="fa-solid fa-pen"></i></a>
+                    <a class="text-white w-1/2 bg-red-500 py-2 rounded-lg" href="/delete/<%= user._id %>"><i class="fa-regular fa-trash-can"></i></a>
                 </div>
             </div>
             <% }); %>
         </div>
+
+        <!-- Main modal -->
+        <div id="crud-modal" tabindex="-1" aria-hidden="true"
+            class="hidden bg-zinc-800/70 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative p-4 w-full max-w-md max-h-full">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <!-- Modal header -->
+                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                            Create Custom User
+                        </h3>
+                        <a href="#"
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            data-modal-toggle="crud-modal">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </a>
+                    </div>
+                    <!-- Modal body -->
+                    <form action="/create" method="post" class="p-4 md:p-5">
+                        <div class="grid gap-4 mb-4 grid-cols-1 sm:grid-cols-2">
+                            <div class="col-span-2">
+                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Enter name" required="">
+                            </div>
+                            <div class="col-span-2">
+                                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Enter email address" required="">
+                            </div>
+                            <div class="col-span-2">
+                                <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Profile Image</label>
+                                <input type="text" name="image" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Image URL">
+                            </div>
+                        </div>
+                        <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create User</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script>
+        const openModal = document.getElementById('openModal');
+        const modal = document.getElementById('crud-modal');
+        const closeModal = document.querySelector('[data-modal-toggle="crud-modal"]');
+
+        openModal.addEventListener('click', () => {
+            modal.classList.add('flex');
+            modal.classList.remove('hidden');
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        });
+    </script>
+
 </body>
 
 </html>

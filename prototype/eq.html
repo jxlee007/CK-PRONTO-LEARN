@@ -352,6 +352,79 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* Add folder/chat list styling */
+        .folder-list {
+            padding: 20px;
+            border-bottom: 1px solid #2a2a4e;
+        }
+
+        .folder-item {
+            padding: 8px;
+            background: #2a2a4e;
+            margin-bottom: 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .folder-item:hover {
+            background: #3a3a5e;
+        }
+
+        .folder-item.active {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .chat-history {
+            padding: 10px;
+            flex: 1;
+            overflow-y: auto;
+            font-size: 14px;
+            max-height: 200px;
+        }
+
+        .chat-message {
+            padding: 8px;
+            margin-bottom: 8px;
+            background: #2a2a4e;
+            border-radius: 6px;
+            border-left: 3px solid #60a5fa;
+        }
+
+        .chat-message.task {
+            border-left-color: #f59e0b;
+        }
+
+        .chat-message.knowledge {
+            border-left-color: #10b981;
+        }
+
+        .chat-message.idea {
+            border-left-color: #8b5cf6;
+        }
+
+        .folder-controls {
+            padding: 10px 20px;
+            border-bottom: 1px solid #2a2a4e;
+        }
+
+        .new-folder-btn {
+            width: 100%;
+            padding: 8px;
+            background: #374151;
+            color: #e2e8f0;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.2s;
+        }
+
+        .new-folder-btn:hover {
+            background: #4b5563;
+        }
     </style>
 </head>
 <body>
@@ -363,6 +436,19 @@
                     <span class="status-indicator" id="statusIndicator"></span>
                     <span id="statusText">Online</span>
                 </div>
+            </div>
+
+            <div class="folder-controls">
+                <button class="new-folder-btn" onclick="createFolder()">➕ New Folder</button>
+            </div>
+
+            <div class="folder-list" id="folderList">
+                <div><strong>Chats / Folders</strong></div>
+                <!-- folders will be dynamically added here -->
+            </div>
+
+            <div class="chat-history" id="chatHistory">
+                <!-- chat messages will be dynamically added here -->
             </div>
 
             <div class="capture-section">
@@ -436,8 +522,13 @@
     <script>
         // App State
         let appState = {
+            folders: [],
+            currentFolderId: null,
+            items: [], // generated items: {id, folderId, type, content, timestamp}
             nodes: [],
             connections: [],
+            tasks: [],
+            habits: [],
             currentView: 'mindmap',
             selectedNode: null,
             isOnline: navigator.onLine,
@@ -451,8 +542,10 @@
         // Initialize app
         document.addEventListener('DOMContentLoaded', function() {
             initializeApp();
+            ensureDefaultFolder();
             loadSampleData();
             updateOnlineStatus();
+            renderChat();
         });
 
         function initializeApp() {
@@ -507,18 +600,78 @@
             updateTaskPanel();
         }
 
+        // Folder Management Functions
+        function ensureDefaultFolder() {
+            if (!appState.folders.length) {
+                createFolder("Default");
+            }
+        }
+
+        function createFolder(name) {
+            if (!name) {
+                name = prompt("Folder name:");
+                if (!name) return;
+            }
+            const id = Date.now();
+            appState.folders.push({ id, name });
+            renderFolders();
+            switchFolder(id);
+        }
+
+        function renderFolders() {
+            const fl = document.getElementById("folderList");
+            fl.innerHTML = '<div><strong>Chats / Folders</strong></div>';
+            appState.folders.forEach(f => {
+                const div = document.createElement("div");
+                div.className = 'folder-item' + (f.id === appState.currentFolderId ? ' active' : '');
+                div.textContent = f.name;
+                div.onclick = () => switchFolder(f.id);
+                fl.appendChild(div);
+            });
+        }
+
+        function switchFolder(folderId) {
+            appState.currentFolderId = folderId;
+            renderFolders();
+            renderChat();
+        }
+
+        function renderChat() {
+            const ch = document.getElementById("chatHistory");
+            ch.innerHTML = '';
+            const msgs = appState.items.filter(it => it.folderId === appState.currentFolderId);
+            msgs.forEach(it => {
+                const div = document.createElement("div");
+                div.className = `chat-message ${it.type}`;
+                div.innerHTML = `<strong>[${it.type.toUpperCase()}]</strong><br>${it.content}`;
+                ch.appendChild(div);
+            });
+        }
+
         function captureInput() {
             const input = document.getElementById('quickInput');
             const content = input.value.trim();
             
             if (!content) return;
 
+            const type = detectInputType(content);
+            
+            // Create item for chat history
+            const item = {
+                id: Date.now(),
+                folderId: appState.currentFolderId,
+                type: type,
+                content: content,
+                timestamp: new Date()
+            };
+            appState.items.push(item);
+
             const newNode = {
                 id: ++appState.nodeCounter,
                 x: Math.random() * 400 + 200,
                 y: Math.random() * 300 + 150,
                 content: content,
-                type: detectInputType(content),
+                type: type,
                 category: 'user-input',
                 timestamp: new Date().toISOString()
             };
@@ -526,6 +679,7 @@
             appState.nodes.push(newNode);
             input.value = '';
             
+            renderChat();
             renderMindMap();
             updateTaskPanel();
             
@@ -595,6 +749,8 @@
                 const transcript = event.results[0][0].transcript;
                 document.getElementById('quickInput').value = transcript;
                 document.getElementById('quickInput').placeholder = 'Capture your thoughts, ideas, or tasks...';
+                // Auto-capture the voice input
+                captureInput();
             };
 
             recognition.onerror = function() {
@@ -617,12 +773,39 @@
                     reader.onload = function(e) {
                         const content = `📷 Image captured: ${file.name}\n[OCR would extract text here]`;
                         document.getElementById('quickInput').value = content;
+                        // Auto-capture the image content
+                        captureInput();
                     };
                     reader.readAsDataURL(file);
                 }
             };
             
             input.click();
+        }
+
+        // AI-like logic: decide whether to add as new node or update existing
+        function generateMindmapItem(item) {
+            // Simple keyword-context match
+            let matched = appState.nodes.find(n => {
+                return item.content.includes(n.content.substring(0, 10));
+            });
+            
+            if (matched) {
+                matched.content += "\n" + item.content;
+            } else {
+                const nid = ++appState.nodeCounter;
+                const nd = {
+                    id: nid,
+                    x: Math.random() * 400 + 200,
+                    y: Math.random() * 300 + 150,
+                    content: item.content,
+                    type: item.type,
+                    timestamp: item.timestamp
+                };
+                appState.nodes.push(nd);
+            }
+            renderMindMap();
+            updateTaskPanel();
         }
 
         function renderMindMap() {
@@ -772,15 +955,23 @@
         }
 
         function updateTaskPanel() {
-            const taskNodes = appState.nodes.filter(node => node.type === 'task');
+            // Update tasks from nodes
+            appState.tasks = appState.nodes.filter(n => n.type === 'task');
             const taskList = document.getElementById('taskList');
             
-            taskList.innerHTML = taskNodes.map(task => `
+            taskList.innerHTML = appState.tasks.map(task => `
                 <div class="task-item">
                     <input type="checkbox" class="task-checkbox">
                     <span>${task.content}</span>
                 </div>
             `).join('');
+        }
+
+        // Habit/achievement tracker (rudimentary)
+        function checkDailyHabits() {
+            // e.g. count completed tasks
+            const completedTasks = document.querySelectorAll('.task-checkbox:checked').length;
+            console.log('Completed tasks today:', completedTasks);
         }
 
         function showMorningBriefing() {
@@ -854,10 +1045,15 @@
             if (saved) {
                 const data = JSON.parse(saved);
                 appState = { ...appState, ...data };
+                renderFolders();
+                renderChat();
                 renderMindMap();
                 updateTaskPanel();
             }
         });
+
+        // Expose createFolder function globally
+        window.createFolder = createFolder;
     </script>
 </body>
 </html>

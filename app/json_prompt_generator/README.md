@@ -1,5 +1,6 @@
 # json_prompt_generator
 
+```
 json-prompt-generator/
 ├── public/
 │   ├── favicon.ico
@@ -73,3 +74,4 @@ json-prompt-generator/
 ├── package.json
 ├── vite.config.ts
 └── README.md
+```

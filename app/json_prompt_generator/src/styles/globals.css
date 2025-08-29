@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #020617;
+    --card: #ffffff;
+    --card-foreground: #020617;
+    --popover: #ffffff;
+    --popover-foreground: #020617;
+    --primary: #16a34a;
+    --primary-foreground: #f0fdf4;
+    --secondary: #f1f5f9;
+    --secondary-foreground: #0f172a;
+    --muted: #f1f5f9;
+    --muted-foreground: #64748b;
+    --accent: #f1f5f9;
+    --accent-foreground: #0f172a;
+    --destructive: #ef4444;
+    --destructive-foreground: #fef2f2;
+    --border: #e2e8f0;
+    --input: #e2e8f0;
+    --ring: #16a34a;
+    --chart-1: #22c55e;
+    --chart-2: #4ade80;
+    --chart-3: #86efac;
+    --chart-4: #16a34a;
+    --chart-5: #15803d;
+    --sidebar: #f8fafc;
+    --sidebar-foreground: #020617;
+    --sidebar-primary: #16a34a;
+    --sidebar-primary-foreground: #f0fdf4;
+    --sidebar-accent: #f1f5f9;
+    --sidebar-accent-foreground: #0f172a;
+    --sidebar-border: #e2e8f0;
+    --sidebar-ring: #16a34a;
+
+    --font-sans: 'Fira Code', sans-serif;
+    --font-serif: 'Fira Code', serif;
+    --font-mono: 'Fira Code', monospace;
+
+    --radius: 0.3rem;
+
+    --shadow-2xs: 0px 3px 6px 0px hsl(0 0% 0% / 0.10);
+    --shadow-xs: 0px 3px 6px 0px hsl(0 0% 0% / 0.10);
+    --shadow-sm: 0px 3px 6px 0px hsl(0 0% 0% / 0.12), 0px 1px 2px -1px hsl(0 0% 0% / 0.12);
+    --shadow: 0px 3px 6px 0px hsl(0 0% 0% / 0.12), 0px 1px 2px -1px hsl(0 0% 0% / 0.12);
+    --shadow-md: 0px 3px 6px 0px hsl(0 0% 0% / 0.12), 0px 2px 4px -1px hsl(0 0% 0% / 0.12);
+    --shadow-lg: 0px 3px 6px 0px hsl(0 0% 0% / 0.12), 0px 4px 6px -1px hsl(0 0% 0% / 0.12);
+    --shadow-xl: 0px 3px 6px 0px hsl(0 0% 0% / 0.12), 0px 8px 10px -1px hsl(0 0% 0% / 0.12);
+    --shadow-2xl: 0px 3px 6px 0px hsl(0 0% 0% / 0.25);
+  }
+
+  .dark {
+    --background: #020617;
+    --foreground: #f0fdf4;
+    --card: #0c0a09;
+    --card-foreground: #f0fdf4;
+    --popover: #0c0a09;
+    --popover-foreground: #f0fdf4;
+    --primary: #22c55e;
+    --primary-foreground: #052e16;
+    --secondary: #1e293b;
+    --secondary-foreground: #f0fdf4;
+    --muted: #1e293b;
+    --muted-foreground: #94a3b8;
+    --accent: #052e16;
+    --accent-foreground: #4ade80;
+    --destructive: #ef4444;
+    --destructive-foreground: #fef2f2;
+    --border: #1e40af;
+    --input: #1e40af;
+    --ring: #4ade80;
+    --chart-1: #22c55e;
+    --chart-2: #4ade80;
+    --chart-3: #86efac;
+    --chart-4: #16a34a;
+    --chart-5: #15803d;
+    --sidebar: #0c0a09;
+    --sidebar-foreground: #f0fdf4;
+    --sidebar-primary: #22c55e;
+    --sidebar-primary-foreground: #052e16;
+    --sidebar-accent: #052e16;
+    --sidebar-accent-foreground: #4ade80;
+    --sidebar-border: #1e40af;
+    --sidebar-ring: #4ade80;
+
+    --font-sans: 'Fira Code', sans-serif;
+    --font-serif: 'Fira Code', serif;
+    --font-mono: 'Fira Code', monospace;
+
+    --radius: 0.3rem;
+
+    --shadow-2xs: 0px 3px 6px 0px hsl(0 0% 0% / 0.10);
+    --shadow-xs: 0px 3px 6px 0px hsl(0 0% 0% / 0.10);
+    --shadow-sm: 0px 3px 6px 0px hsl(0 0% 0% / 0.20), 0px 1px 2px -1px hsl(0 0% 0% / 0.20);
+    --shadow: 0px 3px 6px 0px hsl(0 0% 0% / 0.20), 0px 1px 2px -1px hsl(0 0% 0% / 0.20);
+    --shadow-md: 0px 3px 6px 0px hsl(0 0% 0% / 0.20), 0px 2px 4px -1px hsl(0 0% 0% / 0.20);
+    --shadow-lg: 0px 3px 6px 0px hsl(0 0% 0% / 0.20), 0px 4px 6px -1px hsl(0 0% 0% / 0.20);
+    --shadow-xl: 0px 3px 6px 0px hsl(0 0% 0% / 0.20), 0px 8px 10px -1px hsl(0 0% 0% / 0.20);
+    --shadow-2xl: 0px 3px 6px 0px hsl(0 0% 0% / 0.50);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+  }
+}
